@@ -39,5 +39,13 @@ var app = new Vue({
     formatTimestamp: function(timestamp) {
       return new Date(timestamp).toUTCString();
     }
+  },
+  watch: {
+    notes: {
+      handler: function() {
+        this.selectedNote.timestamp = Date.now();
+      },
+      deep: true
+    }
   }
 });

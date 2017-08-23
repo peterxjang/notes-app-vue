@@ -27,7 +27,7 @@
       </div>
       <div class="note-editor" v-if="selectedNote.timestamp">
         <p class="note-editor-info">{{ selectedNote.timestamp | formatTimestamp }}</p>
-        <textarea class="note-editor-input">{{ selectedNote.body }}</textarea>
+        <textarea class="note-editor-input" v-model="selectedNote.body">{{ selectedNote.body }}</textarea>
       </div>
     </div>
   </div>
