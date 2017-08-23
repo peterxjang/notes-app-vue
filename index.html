@@ -12,7 +12,7 @@
     <div class="toolbar">
       <button class="toolbar-button" v-on:click="createNote()">New</button>
       <button class="toolbar-button" v-on:click="deleteNote()">Delete</button>
-      <input class="toolbar-search" type="text" placeholder="Search...">
+      <input class="toolbar-search" type="text" placeholder="Search..." v-model="searchNoteText">
     </div>
     <div class="note-container">
       <div class="note-selectors">

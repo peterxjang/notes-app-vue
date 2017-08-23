@@ -3,7 +3,8 @@ var app = new Vue({
   el: '#app',
   data: {
     notes: [],
-    selectedNote: {}
+    selectedNote: {},
+    searchNoteText: ""
   },
   mounted: function() {
     this.notes = [
@@ -40,9 +41,13 @@ var app = new Vue({
   },
   computed: {
     transformedNotes: function() {
-      return this.notes.slice().sort(function(a, b) {
-        return b.timestamp - a.timestamp;
-      });
+      return this.notes
+        .filter(function(note) {
+          return note.body.toLowerCase().indexOf(this.searchNoteText.toLowerCase()) !== -1;
+        }.bind(this))
+        .sort(function(a, b) {
+          return b.timestamp - a.timestamp;
+        });
     }
   },
   filters: {
@@ -66,6 +71,13 @@ var app = new Vue({
         this.selectedNote.timestamp = Date.now();
       },
       deep: true
+    },
+    searchNoteText: function() {
+      if (this.transformedNotes.length === 0) {
+        this.selectedNote = {};
+      } else if (this.transformedNotes.indexOf(this.selectedNote) === -1) {
+        this.selectedNote = this.transformedNotes[0];
+      }
     }
   }
 });
